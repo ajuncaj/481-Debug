@@ -1,0 +1,18 @@
+#!/bin/bash
+PATCH='patch.'
+
+#Loop through and do stuff
+for i in $@
+do
+   cp wireworld-original.c wireworld.c
+
+   CMD=$PATCH$i
+   patch < ${CMD} wireworld.c
+
+   if ! gcc -c wireworld.c; then
+      exit 1
+   fi
+
+   rm wireworld.c
+done
+exit 0
